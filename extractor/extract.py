@@ -22,7 +22,8 @@ def main():
 
     for src, src_lang, dst, dst_lang in extract_segments(args.tmx_file):
         task_queue.send_task(
-            'clean', kwargs={'src': src, 'src_lang': src_lang, 'dst': dst, 'dst_lang': dst_lang},
+            'cleanTask',
+            kwargs={'src': src, 'src_lang': src_lang, 'dst': dst, 'dst_lang': dst_lang, 'output': args.output},
         )
 
 

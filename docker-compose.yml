@@ -25,6 +25,17 @@ services:
     volumes:
       - ./resources:/extractor/resources
 
+  cleaner:
+    image: cleaner
+    container_name: cleaner
+    environment:
+      - BROKER_URL
+    build:
+      context: ./cleaner
+    networks:
+      - rabbitmq_net
+    depends_on:
+      - rabbitmq
 
 #  cleaner
 #  aligner:
