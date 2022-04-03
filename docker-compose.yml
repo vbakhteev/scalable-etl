@@ -33,7 +33,6 @@ services:
 
   cleaner:
     image: cleaner
-    container_name: cleaner
     environment:
       - BROKER_URL
     build:
