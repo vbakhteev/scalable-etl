@@ -26,3 +26,8 @@ Submit your file
 - Worker X takes the cleaning task, filters sentences and sends the alignment task to celery
 - Worker Y takes the alignment task, runs the alignment model, and sends the write task to celery
 - The Extractor takes the write task and writes the sentences to the output file
+
+## Next steps
+
+It is better to transfer the alignment model to another service using Triton in order to use batching.
+In addition, the model adds a lot of dependencies to the worker, which is not very nice. 
