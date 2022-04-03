@@ -1,0 +1,7 @@
+celery==5.1.2
+
+numpy==1.15.4
+cython==0.29.6
+fairseq==0.10.2
+faiss
+fastBPE

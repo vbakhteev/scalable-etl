@@ -2,6 +2,7 @@ import os
 
 from celery import Celery
 
+from alignment import are_texts_aligned
 from filtering import filter_text
 
 task_queue = Celery(
@@ -16,14 +17,15 @@ def clean(src, src_lang, dst, dst_lang, output):
     dst_clean = filter_text(dst)
 
     task_queue.send_task(
-        'master.writeTask',
+        'node.alignTask',
         kwargs={'src': src_clean, 'src_lang': src_lang, 'dst': dst_clean, 'dst_lang': dst_lang, 'output': output},
-        queue='masterq',
+        queue='nodeq',
     )
 
 
 @task_queue.task(name='node.alignTask')
 def align(src, src_lang, dst, dst_lang, output):
+    # sentences_aligned = are_texts_aligned(src, dst)
     sentences_aligned = True
 
     if sentences_aligned:

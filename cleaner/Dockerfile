@@ -1,12 +1,20 @@
-FROM python:3.9
+FROM python:3.6
 
 ENV PYTHONUNBUFFERED 1
 
 RUN /usr/local/bin/python -m pip install --upgrade pip
 
-RUN pip install --no-cache-dir celery==5.1.2
+RUN mkdir /project && cd /project && git clone https://github.com/facebookresearch/LASER.git;
+RUN cd /project/LASER; \
+    export LASER="$PWD"; \
+    bash ./install_models.sh; \
+    bash ./install_external_tools.sh
 
-WORKDIR /cleaner
+RUN pip install torch==1.5.0
+COPY requirements.txt /var/local/
+RUN pip install --no-cache-dir -r /var/local/requirements.txt
+
+WORKDIR /project/cleaner
 
 COPY . .
 
