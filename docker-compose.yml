@@ -15,7 +15,6 @@ services:
   extractor:
     image: extractor
     container_name: extractor
-    command: tail -F .
     environment:
       - BROKER_URL
     build:
@@ -24,6 +23,8 @@ services:
       - rabbitmq_net
     volumes:
       - ./resources:/extractor/resources
+    depends_on:
+      - rabbitmq
 
   cleaner:
     image: cleaner
@@ -37,9 +38,6 @@ services:
     depends_on:
       - rabbitmq
 
-#  cleaner
-#  aligner:
-#  writer:
 
 networks:
   rabbitmq_net:

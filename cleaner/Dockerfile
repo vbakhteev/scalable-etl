@@ -10,4 +10,4 @@ WORKDIR /cleaner
 
 COPY . .
 
-ENTRYPOINT celery -A main worker --autoscale 4 --loglevel=info
+ENTRYPOINT celery -A worker worker --autoscale 4 --loglevel=info -Q nodeq
