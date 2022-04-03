@@ -14,7 +14,7 @@ make deploy
 ```
 Submit your file
 ```
-./run.sh
+./run.sh resources/tmx-file.tmx resources/output.txt
 ```
 
 
